@@ -160,11 +160,11 @@ int main(void){
 	
 	// 以下為 while or do while
 	while(score < 3){
-		printf("Score:%d\n", score);
 		printf("|隱藏的賓果盤|\n");
 		displayTable(bingoTable);
 		printf("|玩家戳號盤|\n");
 		displayTable(playerTable);
+		printf("Score:%d\n", score);
 		int number;
 		printf("Plz input a number:");
 		scanf(" %d", &number);
@@ -176,12 +176,12 @@ int main(void){
 			+	checkCross(playerTable);
 		system("CLS");
 	}
-	printf("Score:%d\n", score);
 	printf("|隱藏的賓果盤|\n");
 	displayTable(bingoTable);
 	printf("|玩家戳號盤|\n");
 	displayTable(playerTable);
 	printf("恭喜結束遊戲\n");
+	printf("Score:%d\n", score);
 	printf("猜測次數:%2d\n", guessTime);
 	system("pause");
 	return 0;
