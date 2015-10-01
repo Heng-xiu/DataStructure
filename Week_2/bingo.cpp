@@ -17,16 +17,16 @@ void displayTable(int matrix[SIZE][SIZE]){
 
 int *createRandNum(){
 	// 產生1~25
-	int	randMatrix[SIZE*SIZE]={0};
+	int	randMatrix[25]={0};
 	// 填入1~25 
-	for(int i=0;i<SIZE*SIZE;i++){
+	for(int i=0;i<25;i++){
 		randMatrix[i] = i+1;
 	}
 	// 打亂順序
 	srand(time(NULL));
-	for(int i=0;i<SIZE*SIZE;i++){
-		int i1 = rand()%SIZE*SIZE;
-		int i2 = rand()%SIZE*SIZE;
+	for(int i=0;i<25;i++){
+		int i1 = rand()%25;
+		int i2 = rand()%25;
 		int temp = randMatrix[i1];
 		randMatrix[i1] = randMatrix[i2];
 		randMatrix[i2] = temp;
@@ -75,7 +75,7 @@ int checkRow(int table[][SIZE]){
 			}
 		}
 		// 一條線就結束 
-		if(checkNum == SIZE){
+		if(checkNum == 5){
 			doneRow[i] = 1;
 			result =  1;
 		}	
@@ -102,7 +102,7 @@ int checkColumn(int table[][SIZE]){
 			}
 		}
 		// 一條線就結束 
-		if(checkNum == SIZE){
+		if(checkNum == 5){
 			doneCol[i] = 1;
 			result =  1;
 		}	
@@ -124,7 +124,7 @@ int checkCross(int table[][SIZE]){
 				checkNum = checkNum + 1;
 			}
 		}
-		if(checkNum == SIZE){
+		if(checkNum == 5){
 			isDoneLeft = 1;
 			result = result + 1;
 		}
@@ -140,7 +140,7 @@ int checkCross(int table[][SIZE]){
 				}
 			}
 		}
-		if(checkNum == SIZE){
+		if(checkNum == 5){
 			isDoneRight = 1;
 			result = result + 1;
 		}
@@ -154,35 +154,32 @@ int main(void){
 	int playerTable[SIZE][SIZE] = {0};
 	int *tmpRand;
 	int score = 0;
-	int guessTime = 0;
 	
 	tmpRand = createRandNum();
 	setValueInTable(tmpRand, bingoTable);
 	
 	// 以下為 while or do while
-	while(score < ((SIZE/2)+1)){
+	while(score < 3){
+		printf("Score:%d\n", score);
 		printf("|隱藏的賓果盤|\n");
 		displayTable(bingoTable);
 		printf("|玩家戳號盤|\n");
 		displayTable(playerTable);
-		printf("Score:%d\n", score);
 		int number;
 		printf("Plz input a number:");
 		scanf(" %d", &number);
 		selectNumber(bingoTable, playerTable, number);
-		guessTime++;
 		score = score
 			+	checkRow(playerTable)
 			+	checkColumn(playerTable)
 			+	checkCross(playerTable);
 		system("CLS");
 	}
+	printf("Score:%d\n", score);
 	printf("|隱藏的賓果盤|\n");
 	displayTable(bingoTable);
 	printf("|玩家戳號盤|\n");
 	displayTable(playerTable);
-	printf("Score: %2d\n", score);
-	printf("猜測次數: %2d\n", guessTime);
 	printf("恭喜結束遊戲\n");
 	system("pause");
 	return 0;
