@@ -17,16 +17,16 @@ void displayTable(int matrix[SIZE][SIZE]){
 
 int *createRandNum(){
 	// 產生1~25
-	int	randMatrix[25]={0};
+	int	randMatrix[SIZE*SIZE]={0};
 	// 填入1~25 
-	for(int i=0;i<25;i++){
+	for(int i=0;i<SIZE*SIZE;i++){
 		randMatrix[i] = i+1;
 	}
 	// 打亂順序
 	srand(time(NULL));
-	for(int i=0;i<25;i++){
-		int i1 = rand()%25;
-		int i2 = rand()%25;
+	for(int i=0;i<SIZE*SIZE;i++){
+		int i1 = rand()%SIZE*SIZE;
+		int i2 = rand()%SIZE*SIZE;
 		int temp = randMatrix[i1];
 		randMatrix[i1] = randMatrix[i2];
 		randMatrix[i2] = temp;
@@ -75,7 +75,7 @@ int checkRow(int table[][SIZE]){
 			}
 		}
 		// 一條線就結束 
-		if(checkNum == 5){
+		if(checkNum == SIZE){
 			doneRow[i] = 1;
 			result =  1;
 		}	
@@ -102,7 +102,7 @@ int checkColumn(int table[][SIZE]){
 			}
 		}
 		// 一條線就結束 
-		if(checkNum == 5){
+		if(checkNum == SIZE){
 			doneCol[i] = 1;
 			result =  1;
 		}	
@@ -124,7 +124,7 @@ int checkCross(int table[][SIZE]){
 				checkNum = checkNum + 1;
 			}
 		}
-		if(checkNum == 5){
+		if(checkNum == SIZE){
 			isDoneLeft = 1;
 			result = result + 1;
 		}
@@ -140,7 +140,7 @@ int checkCross(int table[][SIZE]){
 				}
 			}
 		}
-		if(checkNum == 5){
+		if(checkNum == SIZE){
 			isDoneRight = 1;
 			result = result + 1;
 		}
@@ -159,7 +159,7 @@ int main(void){
 	setValueInTable(tmpRand, bingoTable);
 	
 	// 以下為 while or do while
-	while(score < 3){
+	while(score < ((SIZE/2)+1)){
 		printf("Score:%d\n", score);
 		printf("|隱藏的賓果盤|\n");
 		displayTable(bingoTable);
