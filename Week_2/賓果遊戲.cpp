@@ -154,32 +154,35 @@ int main(void){
 	int playerTable[SIZE][SIZE] = {0};
 	int *tmpRand;
 	int score = 0;
+	int guessTime = 0;
 	
 	tmpRand = createRandNum();
 	setValueInTable(tmpRand, bingoTable);
 	
 	// 以下為 while or do while
 	while(score < ((SIZE/2)+1)){
-		printf("Score:%d\n", score);
 		printf("|隱藏的賓果盤|\n");
 		displayTable(bingoTable);
 		printf("|玩家戳號盤|\n");
 		displayTable(playerTable);
+		printf("Score:%d\n", score);
 		int number;
 		printf("Plz input a number:");
 		scanf(" %d", &number);
 		selectNumber(bingoTable, playerTable, number);
+		guessTime++;
 		score = score
 			+	checkRow(playerTable)
 			+	checkColumn(playerTable)
 			+	checkCross(playerTable);
 		system("CLS");
 	}
-	printf("Score:%d\n", score);
 	printf("|隱藏的賓果盤|\n");
 	displayTable(bingoTable);
 	printf("|玩家戳號盤|\n");
 	displayTable(playerTable);
+	printf("Score: %2d\n", score);
+	printf("猜測次數: %2d\n", guessTime);
 	printf("恭喜結束遊戲\n");
 	system("pause");
 	return 0;
