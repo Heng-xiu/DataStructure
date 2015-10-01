@@ -154,7 +154,7 @@ int main(void){
 	int playerTable[SIZE][SIZE] = {0};
 	int *tmpRand;
 	int score = 0;
-	
+	int guessTime = 0;
 	tmpRand = createRandNum();
 	setValueInTable(tmpRand, bingoTable);
 	
@@ -169,6 +169,7 @@ int main(void){
 		printf("Plz input a number:");
 		scanf(" %d", &number);
 		selectNumber(bingoTable, playerTable, number);
+		guessTime++;
 		score = score
 			+	checkRow(playerTable)
 			+	checkColumn(playerTable)
@@ -181,6 +182,7 @@ int main(void){
 	printf("|玩家戳號盤|\n");
 	displayTable(playerTable);
 	printf("恭喜結束遊戲\n");
+	printf("猜測次數:%2d\n", guessTime);
 	system("pause");
 	return 0;
 }
