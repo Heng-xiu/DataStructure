@@ -1,6 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h> 
-#include <time.h>
+#include <time.h> 
 
 #define SIZE 5
 
@@ -45,24 +45,29 @@ void setValueInTable(int randMatrix[], int table[][SIZE]){
 void selectNumber(int bingoTable[][SIZE], int table[][SIZE], int number){
 	int i;
 	int j;
-	for(i=0;i<SIZE;i++){
-		for(j=0;j<SIZE;j++){
-			if( *(*(bingoTable+i)+j) == number){
-				*(*(table+i)+j) = 1;
+	if(number <= (SIZE*SIZE)){
+		for(i=0;i<SIZE;i++){
+			for(j=0;j<SIZE;j++){
+				if( *(*(bingoTable+i)+j) == number){
+					*(*(table+i)+j) = 1;
+				}
 			}
 		}
-	}
+	}	
 }
 
 int checkRow(int table[][SIZE]){
 	int i;
 	int j;
 	int checkNum;
+	int result=0;
 	static int doneRow[5]={0};
 	for(i=0;i<SIZE;i++){
 		checkNum = 0;
 		// 若已經檢查則跳過 
-		if(doneRow[i] == 1)continue; 
+		if(doneRow[i] == 1){
+			continue;
+		} 
 		// 計算是否一條線 
 		for(j=0;j<SIZE;j++){
 			if( *(*(table+i)+j) == 1){
@@ -72,32 +77,37 @@ int checkRow(int table[][SIZE]){
 		// 一條線就結束 
 		if(checkNum == 5){
 			doneRow[i] = 1;
-			return 1;
+			result =  1;
 		}	
 	}
+	return result;
 }
 
 int checkColumn(int table[][SIZE]){
 	int i;
 	int j;
 	int checkNum;
+	int result = 0;
 	static int doneCol[SIZE]={0};
-	for(j=0;j<SIZE;j++){
+	for(i=0;i<SIZE;i++){
 		checkNum = 0;
-		// 若已經檢查則跳過
-		if(doneCol[j]==1)continue;
-		// 計算是否一條線
-		for(i=0;i<SIZE;i++){
-			if( *(*(table+i)+j) == 1){
+		// 若已經檢查則跳過 
+		if(doneCol[i] == 1){
+			continue;
+		} 
+		// 計算是否一條線 
+		for(j=0;j<SIZE;j++){
+			if( *(*(table+j)+i) == 1){
 				checkNum = checkNum + 1;
 			}
 		}
-		// 一條線就結束
+		// 一條線就結束 
 		if(checkNum == 5){
-			doneCol[j]=1;
-			return 1;
-		}
+			doneCol[i] = 1;
+			result =  1;
+		}	
 	}
+	return result;
 }
 
 int checkCross(int table[][SIZE]){
@@ -144,12 +154,12 @@ int main(void){
 	int playerTable[SIZE][SIZE] = {0};
 	int *tmpRand;
 	int score = 0;
+	
 	tmpRand = createRandNum();
 	setValueInTable(tmpRand, bingoTable);
 	
 	// 以下為 while or do while
 	while(score < 3){
-		printf("有BUG在最後一列上, 使用column\n");
 		printf("Score:%d\n", score);
 		printf("|隱藏的賓果盤|\n");
 		displayTable(bingoTable);
@@ -159,11 +169,18 @@ int main(void){
 		printf("Plz input a number:");
 		scanf(" %d", &number);
 		selectNumber(bingoTable, playerTable, number);
-		score += checkRow(playerTable);
-		score += checkColumn(playerTable);
-		score += checkCross(playerTable);
+		score = score
+			+	checkRow(playerTable)
+			+	checkColumn(playerTable)
+			+	checkCross(playerTable);
 		system("CLS");
 	}
+	printf("Score:%d\n", score);
+	printf("|隱藏的賓果盤|\n");
+	displayTable(bingoTable);
+	printf("|玩家戳號盤|\n");
+	displayTable(playerTable);
+	printf("恭喜結束遊戲\n");
 	system("pause");
 	return 0;
 }
