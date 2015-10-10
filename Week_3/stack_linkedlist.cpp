@@ -78,7 +78,18 @@ void popStack(struct linkedlistNode *startNode){
 	}
 	displayLinkedlist(startNode);
 }
-
+void showInitile(){
+	printf("[1] 顯示資料\n");
+	printf("[2] 新增資料\n");
+	printf("[3] 刪除資料\n");
+	printf("[4] 還我畫面\n");
+}
+int getChoice(){
+	int result;
+	printf("選擇:\n");
+	scanf(" %d", &result);
+	return result;
+}
 
 int main(){	
 	// create linkedlist
@@ -86,14 +97,28 @@ int main(){
 	startNode = (linkedlistNode*)malloc(sizeof(linkedlistNode));
 	startNode->data = NULL;
 	startNode->nextNodeAddr = NULL;
-	displayLinkedlist(startNode);
-	pushStack(startNode);
-	pushStack(startNode);
-	pushStack(startNode);
-	popStack(startNode);
-	popStack(startNode);
-	popStack(startNode);
-	popStack(startNode);
+	int choice;
+	while(1){
+		showInitile();
+		choice = getChoice();
+		switch(choice){
+			case 1:
+				displayLinkedlist(startNode);
+				break;
+			case 2:
+				pushStack(startNode);
+				break;
+			case 3:
+				popStack(startNode);
+				break;
+			case 4:
+				system("CLS");
+				break;
+			default:
+				printf("你壞壞\n");
+				break;
+		}
+	}
 	system("pause");
 	return 0;
 }
