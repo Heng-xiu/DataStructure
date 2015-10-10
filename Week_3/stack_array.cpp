@@ -59,15 +59,45 @@ void pushStack(int stack[STACK_SIZE], int *top){
 	displayStack(stack);
 }
 
+void showInitile(){
+	printf("[1] 顯示資料\n");
+	printf("[2] 新增資料\n");
+	printf("[3] 刪除資料\n");
+	printf("[4] 還我畫面\n");
+}
+
+int getChoice(){
+	int result;
+	printf("選擇:\n");
+	scanf(" %d", &result);
+	return result;
+}
+
 int main(){	
 	//create STACK
 	int stack[STACK_SIZE] = {0};
 	int top = -1;
-	displayStack(stack);
-	pushStack(stack, &top);
-	pushStack(stack, &top);
-	pushStack(stack, &top);
-	popStack(stack, &top);
+	int choice;
+	while(1){
+		showInitile();
+		choice = getChoice();
+		switch(choice){
+			case 1:
+				displayStack(stack);
+				break;
+			case 2:
+				pushStack(stack, &top);
+				break;
+			case 3:
+				popStack(stack, &top);
+				break;
+			case 4:
+				system("CLS");
+				break;
+			default:
+				break;
+		}
+	}
 	system("pause");
 	return 0;
 }
