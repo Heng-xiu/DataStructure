@@ -99,6 +99,7 @@ int main(){
 				system("CLS");
 				break;
 			default:
+				printf("§AÃaÃa\n");
 				break;
 		}
 	}
