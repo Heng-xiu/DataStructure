@@ -62,21 +62,46 @@ void delqueue(int queue[QUEUE_SIZE], int *rear, int *front){
 	displayQueue(queue);
 }
 
+void showInitile(){
+	printf("[1] 顯示資料\n");
+	printf("[2] 新增資料\n");
+	printf("[3] 刪除資料\n");
+	printf("[4] 還我畫面\n");
+}
+
+int getChoice(){
+	int result;
+	printf("選擇:\n");
+	scanf(" %d", &result);
+	return result;
+}
+
 int main(){	
 	// create queue
 	int queue[QUEUE_SIZE]={0};
 	int rear = 0;
 	int front = 0;
-	displayQueue(queue);
-	Enqueue(queue, &rear, &front);
-	Enqueue(queue, &rear, &front);
-	Enqueue(queue, &rear, &front);
-	delqueue(queue, &rear, &front);
-	Enqueue(queue, &rear, &front);
-	Enqueue(queue, &rear, &front);
-	Enqueue(queue, &rear, &front);
-	Enqueue(queue, &rear, &front);
-	Enqueue(queue, &rear, &front);
+	int choice;
+	while(1){
+		showInitile();
+		choice = getChoice();
+		switch(choice){
+			case 1:
+				displayQueue(queue);
+				break;
+			case 2:
+				Enqueue(queue, &rear, &front);
+				break;
+			case 3:
+				delqueue(queue, &rear, &front);
+				break;
+			case 4:
+				system("CLS");
+				break;
+			default:
+				break;
+		}
+	}
 	system("pause");
 	return 0;
 }
