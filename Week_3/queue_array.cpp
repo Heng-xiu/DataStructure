@@ -63,6 +63,7 @@ void delqueue(int queue[QUEUE_SIZE], int *rear, int *front){
 }
 
 void showInitile(){
+	printf("Queue_array\n");
 	printf("[1] 顯示資料\n");
 	printf("[2] 新增資料\n");
 	printf("[3] 刪除資料\n");

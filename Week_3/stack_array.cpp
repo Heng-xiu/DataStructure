@@ -60,6 +60,7 @@ void pushStack(int stack[STACK_SIZE], int *top){
 }
 
 void showInitile(){
+	printf("Stack_array\n");
 	printf("[1] 顯示資料\n");
 	printf("[2] 新增資料\n");
 	printf("[3] 刪除資料\n");

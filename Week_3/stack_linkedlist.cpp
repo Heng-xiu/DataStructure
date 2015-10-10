@@ -79,6 +79,7 @@ void popStack(struct linkedlistNode *startNode){
 	displayLinkedlist(startNode);
 }
 void showInitile(){
+	printf("Stack_linkedlist\n");
 	printf("[1] 顯示資料\n");
 	printf("[2] 新增資料\n");
 	printf("[3] 刪除資料\n");

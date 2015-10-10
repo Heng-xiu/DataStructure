@@ -88,6 +88,7 @@ void delQueue(struct linkedlistNode *startNode, int *front, int *rear){
 	displayQueue(startNode);
 }
 void showInitile(){
+	printf("Queue_linkedlist\n");
 	printf("[1] 顯示資料\n");
 	printf("[2] 新增資料\n");
 	printf("[3] 刪除資料\n");
